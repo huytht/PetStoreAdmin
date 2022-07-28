@@ -1,0 +1,72 @@
+<div class="full-page login-page pt-5">
+  <div class="content">
+    <div class="container">
+      <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+        <form
+          #loginForm="ngForm"
+          [formGroup]="loginFormGroup"
+          (ngSubmit)="onSubmit(loginForm.value)"
+          action=""
+        >
+          <div class="card card-login card-white">
+            <div class="card-header">
+              <img alt="" src="assets/img/card-primary.png" />
+              <h1 class="card-title">Login</h1>
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="tim-icons icon-single-02"></i>
+                    </div>
+                  </div>
+                  <input
+                    formControlName="username"
+                    class="form-control"
+                    placeholder="Username"
+                    type="text"
+                    id="username"
+                    autofocus
+                  />
+                </div>
+                <div *ngIf="username.invalid && (username.dirty || username.touched)" class="help-block mt-1">
+                  <div *ngIf="username.errors.required" class="text-danger">
+                    Username is required
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <i class="tim-icons icon-lock-circle"></i>
+                    </div>
+                  </div>
+                  <input
+                    formControlName="password"
+                    class="form-control"
+                    placeholder="Password"
+                    id="password"
+                    type="password"
+                  />
+                </div>
+                <div *ngIf="password.invalid && (password.dirty || password.touched)" class="help-block mt-1">
+                  <div *ngIf="password.errors.required" class="text-danger">
+                    Password is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button type="submit" class="btn btn-primary btn-lg btn-block mb-3">
+                <span *ngIf="showLoading"><i *ngIf="showLoading" class="fa fa-spinner"></i> Loading...</span>
+                <span class="m-r-n-lg" *ngIf="!showLoading">Get Started</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

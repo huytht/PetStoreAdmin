@@ -1,0 +1,80 @@
+<div class="content">
+  <div class="row">
+    <div class="col-md">
+      <h3>User Management</h3>
+      <button (click)="exportUserDataToCSV()" mat-raised-button color="primary">Export to CSV</button>
+      <br /><br />
+      <ngx-datatable
+        class="material"
+        [rows]="users"
+        [columnMode]="ColumnMode.force"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [limit]="5"
+        [rowHeight]="50"
+        [reorderable]="reorderable"
+      >
+        <ngx-datatable-column name="Username" [width]="200">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Email" [width]="250">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Full Name">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            {{ row.userInfo.lastName }} {{ row.userInfo.firstName }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Created">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            {{ row.dateNew | date: "HH:mm:ss dd/MM/yyyy" }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Last Update">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            {{ row.dateEdit | date: "HH:mm:ss dd/MM/yyyy" }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Role" [width]="100">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            {{ getRole(row.appRoles) }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Locked" [width]="50">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            {{ !row.accountNonLocked ? "Đã khóa" : "Không" }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Status" [width]="120">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            {{ row.enabled ? "Đã kích hoạt" : "Chưa XN/Đã chặn" }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Actions" [width]="50">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            <div *ngIf="!isAdmin(row.appRoles)">
+              <a
+                href="javascript:void(0)"
+                title="Khóa"
+                *ngIf="row.enabled"
+                (click)="openUpdateStatusDialog(row.id, !row.enabled)"
+                ><span class="material-icons text-success">toggle_on</span></a
+              >
+              <a
+                href="javascript:void(0)"
+                title="Mở khóa"
+                *ngIf="!row.enabled"
+                (click)="openUpdateStatusDialog(row.id, !row.enabled)"
+                ><span class="material-icons text-danger">toggle_off</span></a
+              >
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>

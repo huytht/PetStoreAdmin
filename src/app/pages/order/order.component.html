@@ -1,0 +1,158 @@
+<div class="content">
+  <div class="row">
+    <div class="col-md">
+      <h3>Order Management</h3>
+      <mat-form-field class="my-form-field mb-2">
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="statusId" (ngModelChange)="getOrderByStatus()">
+          <mat-option *ngFor="let status of statusList" [value]="status.id">{{
+            status.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <ngx-datatable
+        #orderTable
+        class="material"
+        [rows]="orders"
+        [columnMode]="ColumnMode.force"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [limit]="5"
+        [rowHeight]="50"
+        [reorderable]="reorderable"
+      >
+        <ngx-datatable-row-detail
+          [rowHeight]="400"
+          (toggle)="onDetailToggle($event)"
+        >
+          <ng-template
+            let-row="row"
+            let-expanded="expanded"
+            
+            ngx-datatable-row-detail-template
+          >
+            <div style="padding: 0 35px">
+              <div class="row">
+                <div class="col-4">
+                  <div class="row">
+                    <div class="col-md-4"><strong>Shipping Adress:</strong></div>
+                    <div class="col-md-6">{{ row.shippingAddress.exactAddress }}, {{ row.shippingAddress.wardCommune }}, {{ row.shippingAddress.district }}, {{ row.shippingAddress.provinceCity }}</div>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-12">
+                  <ngx-datatable
+                    #orderItemTable
+                    class="material"
+                    [rows]="row.orderItems"
+                    [columnMode]="ColumnMode.force"
+                    [headerHeight]="50"
+                    [footerHeight]="50"
+                    [limit]="4"
+                    [rowHeight]="50"
+                    [reorderable]="reorderable"
+                  >
+                    <ngx-datatable-column>
+                      <ng-template let-row="row" ngx-datatable-cell-template>
+                        <img
+                          src="{{ baseUrl }}{{ row.imageUrl }}"
+                          alt="product"
+                          class="img-fluid"
+                          style="width: 50px; height: 50px"
+                        />
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Name">
+                      <ng-template ngx-datatable-cell-template let-row="row">{{
+                        row.name
+                      }}</ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Quantity">
+                      <ng-template ngx-datatable-cell-template let-row="row">{{
+                        row.quantity
+                      }}</ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Price">
+                      <ng-template ngx-datatable-cell-template let-row="row">{{
+                        row.price | currency: "VND"
+                      }}</ng-template>
+                    </ngx-datatable-column>
+                  </ngx-datatable>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </ngx-datatable-row-detail>
+        <ngx-datatable-column
+          [width]="50"
+          [resizeable]="false"
+          [sortable]="false"
+          [draggable]="false"
+          [canAutoResize]="false"
+        >
+          <ng-template
+            let-row="row"
+            let-expanded="expanded"
+            ngx-datatable-cell-template
+          >
+            <a
+              href="javascript:void(0)"
+              [class.datatable-icon-right]="!expanded"
+              [class.datatable-icon-down]="expanded"
+              title="Expand/Collapse Row"
+              (click)="toggleExpandRow(row)"
+            >
+            </a>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Order Tracking Number" prop="orderTrackingNumber"></ngx-datatable-column>
+        <ngx-datatable-column name="Order Date" [width]="70">
+          <ng-template ngx-datatable-cell-template let-row="row">{{
+            row.orderDate | date: "HH:mm:ss dd/MM/yyyy"
+          }}</ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Total Quantity" [width]="15" prop="totalQuantity"></ngx-datatable-column>
+        <ngx-datatable-column name="Total Price" [width]="30">
+          <ng-template ngx-datatable-cell-template let-row="row">{{
+            row.totalPrice | currency: "VND"
+          }}</ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Payment Method" [width]="50">
+          <ng-template ngx-datatable-cell-template let-row="row">{{
+            row.paymentId === 1 ? "Paypal" : "Momo"
+          }}</ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Order Status" prop="orderStatus.name" [width]="50">
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Actions" [width]="50">
+          <ng-template ngx-datatable-cell-template let-row="row">
+            <a
+              [routerLink]=""
+              *ngIf="row.orderStatus.id === 2"
+              (click)="orderConfirm(row.orderTrackingNumber)"
+              class="text-success"
+              title="Duyệt đơn hàng"
+              ><i class="material-icons">task</i></a
+            >
+            <a
+              [routerLink]=""
+              *ngIf="row.orderStatus.id !== 2"
+              class="disabled"
+              title="Duyệt đơn hàng"
+              ><i class="material-icons">task</i></a
+            >
+            <a
+              [routerLink]=""
+              (click)="openDeleteDialog(row.id)"
+              class="pr-2 text-danger"
+              title="Xóa đơn hàng"
+              ><i class="material-icons">delete</i></a
+            >
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>
