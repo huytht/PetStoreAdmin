@@ -1,0 +1,9 @@
+<h1 mat-dialog-title class="text-danger">Alert</h1>
+<div mat-dialog-content>
+  <p class="text-dark" *ngIf="!enable">Are you sure you want to enable this user?</p>
+  <p class="text-dark" *ngIf="enable">Are you sure you want to disable this?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="confirmUpdate()" cdkFocusInitial>Confirm</button>
+</div> 
