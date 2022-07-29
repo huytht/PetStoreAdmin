@@ -3,6 +3,8 @@ import { OrderItem } from "./order-item";
 import { OrderStatus } from "./order-status";
 
 export class Order {
+
+    id: number;
     orderTrackingNumber: string;
     orderDate: string;
     orderStatus: OrderStatus;

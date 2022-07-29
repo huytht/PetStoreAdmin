@@ -1,6 +1,7 @@
 import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ToastrService } from "ngx-toastr";
+import { AppOrderService } from "src/app/@service/app-order.service";
 
 @Component({
   selector: 'delete-modal',
@@ -10,38 +11,26 @@ import { ToastrService } from "ngx-toastr";
 export class DeleteModal {
 
   constructor(public dialogRef: MatDialogRef<DeleteModal>, @Inject(MAT_DIALOG_DATA) public data: any,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService, private orderService: AppOrderService) { }
 
   confirmDelete() {
-    // switch (this.data.type) {
-    //   case 'track':
-    //     this.removeTrack();
-    //     break;
-
-    //   case 'album':
-    //     this.deleteAlbum();
-    //     break;
-
-    //   case 'playlist':
-    //     this.deletePlaylist();
-    //     break;
-
-    //   case 'track-from-playlist':
-    //     this.removeTrackFormPlaylist();
-    //     break;
-    // }
+    switch (this.data.type) {
+      case 'order':
+        this.removeOrder();
+        break;
+    }
   }
 
-  // removeTrack() {
-  //   this.trackService.removeTrack(this.data.trackId).subscribe(
-  //     (response: any) => {
-  //       this.toastr.success('Xóa bài hát thành công');
-  //       this.dialogRef.close();
-  //     }, (error) => {
-  //       this.toastr.error(error.error.errorMessage);
-  //     }
-  //   );
-  // }
+  removeOrder() {
+    this.orderService.deleteOrder(this.data.orderId).subscribe(
+      (response: any) => {
+        this.toastr.success('Xóa đơn hàng thành công');
+        this.dialogRef.close();
+      }, (error) => {
+        this.toastr.error(error.error.errorMessage);
+      }
+    );
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
