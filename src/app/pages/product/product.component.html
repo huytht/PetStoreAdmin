@@ -1,0 +1,37 @@
+<div class="content">
+    <div class="row">
+        <div class="col-md">
+            <h3>Product Management</h3>
+            <button mat-raised-button color="primary">Add new product</button>
+            <br /><br />
+            <ngx-datatable #productTable class="material" [rows]="products" [columnMode]="ColumnMode.force"
+                [headerHeight]="50" [footerHeight]="50" [limit]="5" [rowHeight]="50" [reorderable]="reorderable">
+                <ngx-datatable-column [width]="30">
+                    <ng-template ngx-datatable-cell-template let-row="row">
+                       <img src="{{ baseUrl }}{{ row.imagePath[0] }}" alt=""> 
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Name" prop="name"></ngx-datatable-column>
+                <ngx-datatable-column name="Amount" prop="amount" [width]="50"></ngx-datatable-column>
+                <ngx-datatable-column name="Description" prop="description"></ngx-datatable-column>
+                <ngx-datatable-column name="Price" [width]="100">
+                    <ng-template ngx-datatable-cell-template let-row="row">{{
+                        row.price | currency: "VND"
+                        }}</ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Status" [width]="50">
+                    <ng-template ngx-datatable-cell-template let-row="row">
+                        {{ row.status ? "AVAILABILITY" : "OUT OF STOCK" }}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Category" prop="category.name"></ngx-datatable-column>
+                <ngx-datatable-column name="Actions" [width]="50">
+                    <ng-template ngx-datatable-cell-template let-row="row">
+                        <a [routerLink]="" (click)="openDeleteDialog(row.id)" class="pr-2 text-danger"
+                            title="Xóa đơn hàng"><i class="material-icons">delete</i></a>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+    </div>
+</div>

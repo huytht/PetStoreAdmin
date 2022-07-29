@@ -25,6 +25,9 @@ import { DeleteModal } from './../../@modal/delete/delete.modal';
 import { UpdateAppStatusModal } from './../../@modal/update-app-status/update-app-status.modal';
 import { UpdateStatusUserModal } from './../../@modal/update-status-user/update-status-user.modal';
 import { OrderComponent } from './../../pages/order/order.component';
+import { DogComponent } from "src/app/pages/dog/dog.component";
+import { CatComponent } from "src/app/pages/cat/cat.component";
+import { ProductComponent } from "src/app/pages/product/product.component";
   
 @NgModule({
   imports: [
@@ -59,6 +62,9 @@ import { OrderComponent } from './../../pages/order/order.component';
     DashboardComponent,
     UserComponent,
     OrderComponent,
+    ProductComponent,
+    CatComponent,
+    DogComponent,
     DeleteModal,
     UpdateAppStatusModal,
     UpdateStatusUserModal,

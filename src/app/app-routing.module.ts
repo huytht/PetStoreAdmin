@@ -8,14 +8,19 @@ import { UserComponent } from './pages/user/user.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AppConstant } from './@constant/app-constant';
 import { OrderComponent } from './pages/order/order.component';
+import { ProductComponent } from './pages/product/product.component';
+import { DogComponent } from './pages/dog/dog.component';
+import { CatComponent } from './pages/cat/cat.component';
 
 const routes: Routes = [
   {
     path: '', component: AdminLayoutComponent, canActivate: [AuthenticationGuard, RoleGuard], data: { roles: [`${AppConstant.APP_ROLE_ADMIN}`] }, children: [
       { path: '', redirectTo: 'user', pathMatch: 'full' },
-      // { path: 'dashboard', component: DashboardComponent },
       { path: 'user', component: UserComponent },
       { path: 'order', component: OrderComponent },
+      { path: 'product', component: ProductComponent },
+      { path: 'cat', component: CatComponent },
+      { path: 'dog', component: DogComponent },
     ]
   },
   {
@@ -28,6 +33,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+exports: [RouterModule]
 })
 export class AppRoutingModule { }

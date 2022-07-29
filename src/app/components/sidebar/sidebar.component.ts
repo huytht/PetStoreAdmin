@@ -27,23 +27,23 @@ export const ROUTES: RouteInfo[] = [
     class: ""
   },
   {
-    path: "/album",
-    title: "Album",
-    icon: "icon-headphones",
+    path: "/product",
+    title: "Product",
+    icon: "icon-molecule-40",
     class: ""
   },
-  // {
-  //   path: "/top-hit",
-  //   title: "Top Hit",
-  //   icon: "icon-chart-bar-32",
-  //   class: ""
-  // },
   {
-    path: "/playlist",
-    title: "Playlist",
-    icon: "icon-triangle-right-17",
+    path: "/dog",
+    title: "Dog",
+    icon: "icon-molecule-40",
     class: ""
-  }
+  },
+  {
+    path: "/cat",
+    title: "Cat",
+    icon: "icon-molecule-40",
+    class: ""
+  },
 ];
 
 @Component({

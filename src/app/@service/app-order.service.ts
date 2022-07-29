@@ -19,7 +19,7 @@ export class AppOrderService extends BaseService{
   }
 
   public confirmOrder(orderTrackingNumber: string): Observable<any> {
-    return this.postRequest(`${this.path}/confirm?order-tracking-number=${orderTrackingNumber}`, {});
+    return this.putRequest(`${this.path}/confirm?order-tracking-number=${orderTrackingNumber}`, {});
   }
 
   public deleteOrder(orderId: number): Observable<any> {
