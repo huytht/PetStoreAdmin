@@ -28,7 +28,9 @@ import { OrderComponent } from './../../pages/order/order.component';
 import { DogComponent } from "src/app/pages/dog/dog.component";
 import { CatComponent } from "src/app/pages/cat/cat.component";
 import { ProductComponent } from "src/app/pages/product/product.component";
-  
+import { SaveProductModal } from "src/app/@modal/save-product/save-product";
+import { NgxMatFileInputModule } from '@angular-material-components/file-input'; 
+
 @NgModule({
   imports: [
   CommonModule,
@@ -49,6 +51,7 @@ import { ProductComponent } from "src/app/pages/product/product.component";
     MatSelectModule,
     MatChipsModule,
     MatAutocompleteModule,
+    NgxMatFileInputModule,
     NgxDatatableModule.forRoot({
       messages: {
         emptyMessage: 'No data to display', // Message to show when array is presented, but contains no values
@@ -65,6 +68,7 @@ import { ProductComponent } from "src/app/pages/product/product.component";
     ProductComponent,
     CatComponent,
     DogComponent,
+    SaveProductModal,
     DeleteModal,
     UpdateAppStatusModal,
     UpdateStatusUserModal,

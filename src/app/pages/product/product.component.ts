@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonService } from 'src/app/@service/common.service';
 import { DeleteModal } from './../../@modal/delete/delete.modal';
 import { environment } from './../../../environments/environment';
+import { SaveProductModal } from './../../@modal/save-product/save-product';
 
 @Component({
   selector: 'app-product',
@@ -53,6 +54,19 @@ export class ProductComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       // this.getOrderByStatus();
+    });
+  }
+
+  openCreateDialog() {
+    const dialogRef = this.dialog.open(SaveProductModal, {
+      width: '300px',
+      data: {
+        type: 'product',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getProductList();
     });
   }
 

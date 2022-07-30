@@ -33,7 +33,6 @@ export class ProductService extends BaseService{
     formData.append('description', product.description);
     formData.append('price', product.price.toString());
     formData.append('amount', product.amount.toString());
-    formData.append('status', product.status);
     formData.append('categoryId', product.category.id.toString());
     images.forEach(image => {
       formData.append("imageFiles", image);
@@ -62,5 +61,13 @@ export class ProductService extends BaseService{
     });
 
     return formData;
+  }
+
+  public saveProduct(formData: FormData): Observable<any> {
+    return this.postRequest(`${this.path}`, formData);
+  }
+
+  public deleteProduct(productId: number): Observable<any> {
+    return this.deleteRequest(`${this.path}?product-id=${productId}`);
   }
 }

@@ -1,0 +1,47 @@
+<h1 mat-dialog-title class="text-warning">Save product</h1>
+<div mat-dialog-content>
+  <!-- write a form add new product -->
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="product.name" placeholder="Name">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Price</mat-label>
+    <input matInput [(ngModel)]="product.price" placeholder="Price">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Amount</mat-label>
+    <input matInput [(ngModel)]="product.amount" placeholder="Price">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput [(ngModel)]="product.description" placeholder="Description"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Image</mat-label>
+    <ngx-mat-file-input [formControl]="fileControl" [multiple]="true">
+    </ngx-mat-file-input>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select matInput [(ngModel)]="product.category">
+      <mat-option *ngFor="let category of categoryList" [value]="category">
+        {{ category.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<!-- 
+      <mat-label>Status</mat-label>
+      <mat-select matInput [(ngModel)]="appStatusId">
+        <mat-option *ngFor="let appStatus of appStatusList" [value]="appStatus.id">
+          {{ appStatus.name }}
+        </mat-option>
+      </mat-select> 
+
+    -->
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="saveProduct()" cdkFocusInitial>OK</button>
+</div>

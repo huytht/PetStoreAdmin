@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md">
             <h3>Product Management</h3>
-            <button mat-raised-button color="primary">Add new product</button>
+            <button (click)="openCreateDialog()" mat-raised-button color="primary">Add new product</button>
             <br /><br />
             <ngx-datatable #productTable class="material" [rows]="products" [columnMode]="ColumnMode.force"
                 [headerHeight]="50" [footerHeight]="50" [limit]="5" [rowHeight]="50" [reorderable]="reorderable">
