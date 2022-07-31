@@ -1,1 +1,51 @@
-<p>cat works!</p>
+<div class="content">
+    <div class="row">
+        <div class="col-md">
+            <h3>Product Management</h3>
+            <button (click)="openCreateDialog()" mat-raised-button color="primary">Add new cat</button>
+            <br /><br />
+            <ngx-datatable #productTable class="material" [rows]="products" [columnMode]="ColumnMode.force"
+                [headerHeight]="50" [footerHeight]="50" [limit]="5" [rowHeight]="50" [reorderable]="reorderable">
+                <ngx-datatable-column [width]="1">
+                    <ng-template ngx-datatable-cell-template let-row="row">
+                       <img src="{{ baseUrl }}{{ row.imagePath[0] }}" alt=""> 
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Name" prop="name" [width]="50"></ngx-datatable-column>
+                <ngx-datatable-column name="Amount" prop="amount" [width]="10"></ngx-datatable-column>
+                <ngx-datatable-column name="Age" prop="age" [width]="1"></ngx-datatable-column>
+                <ngx-datatable-column name="Origin" [width]="100">
+                    <ng-template ngx-datatable-cell-template let-row="row">
+                        {{ getOrigins(row.origins) }}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Breed" [width]="10">
+                    <ng-template ngx-datatable-cell-template let-row="row">
+                        {{ row.breed?.name }}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Price" [width]="50">
+                    <ng-template ngx-datatable-cell-template let-row="row">{{
+                        row.price | currency: "VND"
+                        }}</ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Status" [width]="50">
+                    <ng-template ngx-datatable-cell-template let-row="row">
+                        {{ row.status ? "AVAILABILITY" : "OUT OF STOCK" }}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Category" prop="category.name" [width]="50"></ngx-datatable-column>
+                <ngx-datatable-column name="Actions" [width]="50">
+                    <ng-template ngx-datatable-cell-template let-row="row">
+                        <a [routerLink]="" (click)="openUpdateAmountDialog(row.id)" class="pr-2 text-danger"
+                            title="Thêm số lượng"><i class="material-icons">post_add</i></a>
+                        <a [routerLink]="" (click)="openUpdateDialog(row)" class="pr-2 text-danger"
+                            title="Sửa thông tin"><i class="material-icons">edit</i></a>
+                        <a [routerLink]="" (click)="openDeleteDialog(row.id)" class="pr-2 text-danger"
+                            title="Xóa sản phẩm"><i class="material-icons">delete</i></a>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+    </div>
+</div>
