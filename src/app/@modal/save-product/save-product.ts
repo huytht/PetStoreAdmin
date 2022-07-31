@@ -7,6 +7,8 @@ import { AppStatusService } from '../../@service/app-status.service';
 import { Category } from './../../@model/category';
 import { FormControl } from '@angular/forms';
 import { ProductService } from './../../@service/product.service';
+import { Breed } from "src/app/@model/breed";
+import { Origin } from "src/app/@model/origin";
 
 @Component({
   selector: 'save-product-modal',
@@ -17,19 +19,42 @@ export class SaveProductModal {
   title: string;
 
   categoryList: Category[];
-  product: Product = new Product();
+  breedList: Breed[];
+  originList: Origin[];
+  product: any;
   fileControl: FormControl = new FormControl('', []);
+  selectedCategory: any;
+  selectedBreed: any;
+  selectedOrigins: any[];
 
   constructor(public dialogRef: MatDialogRef<SaveProductModal>, @Inject(MAT_DIALOG_DATA) public data: any,
     private productService: ProductService, private toastr: ToastrService, private commonService: CommonService) {
     this.commonService.getCategoryList().subscribe(
       (response: any) => {
         this.categoryList = response.data;
+        this.selectedCategory = this.data.method === "update" ? this.categoryList.find(x => x.id === this.product.category.id) : null;
       }, (error) => {
         this.toastr.error(error.error.errorMessage);
       }
     );
-    // this.appStatusId = this.data.appStatusId;
+    this.commonService.getBreedList().subscribe(
+      (response: any) => {
+        this.breedList = response.data;
+        this.selectedBreed = this.data.method === "update" ? this.breedList.find(x => x.id === this.product.breed.id) : null;
+      }, (error) => {
+        this.toastr.error(error.error.errorMessage);
+      }
+    );
+    this.commonService.getOriginList().subscribe(
+      (response: any) => {
+        this.originList = response.data;
+        this.selectedOrigins = this.data.method === "update" ? this.product.origins : null;
+      }, (error) => {
+        this.toastr.error(error.error.errorMessage);
+      }
+    );
+    
+    this.product = data.method === "update" ? data.product : {};
   }
 
   confirmUpdate() {
@@ -41,12 +66,14 @@ export class SaveProductModal {
     }
   }
 
-  testFile() {
-    console.log(this.fileControl);
-  }
-
-  saveProduct() {
-    const formData = this.productService.createProductFormData(this.product, this.fileControl.value);
+  createProduct() {
+    this.product.category = this.selectedCategory;
+    if (this.data.type === "pet") {
+      this.product.breed = this.selectedBreed;
+    }
+    const formData = this.data.type === "pet" 
+    ? this.productService.createPetFormData(this.product, this.fileControl.value, this.selectedOrigins) 
+    : this.productService.createProductFormData(this.product, this.fileControl.value);
     this.productService.saveProduct(formData).subscribe(
       (response: any) => {
         this.toastr.success("Saved successfully");
@@ -57,7 +84,39 @@ export class SaveProductModal {
     );
   }
 
+  updateProduct() {
+    this.product.categoryId = this.selectedCategory.id;
+    if (this.data.type === "pet") {
+      this.product.breedId = this.selectedBreed.id;
+      this.product.originIds = this.selectedOrigins.map(x => x.id);
+    }
+    this.productService.updateProduct(this.data.product.id, this.product).subscribe(
+      (response: any) => {
+        this.toastr.success("Updated successfully");
+        this.dialogRef.close();
+      }, (error) => {
+        this.toastr.error(error.error.errorMessage);
+      }
+    );
+  }
+
+  saveProduct() {
+    switch (this.data.method) {
+      case 'create':
+        this.createProduct();
+        break;
+      case 'update':
+        this.updateProduct();
+        break;
+    }
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  comparer(o1: any, o2: any): boolean {
+    // if possible compare by object's name, and not by reference.
+    return o1 && o2 ? o1.id === o2.id : o2 === o2;
   }
 }
