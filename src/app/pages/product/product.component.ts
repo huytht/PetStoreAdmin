@@ -8,6 +8,7 @@ import { CommonService } from 'src/app/@service/common.service';
 import { DeleteModal } from './../../@modal/delete/delete.modal';
 import { environment } from './../../../environments/environment';
 import { SaveProductModal } from './../../@modal/save-product/save-product';
+import { AddInventoryModal } from 'src/app/@modal/add-inventory/add-inventory';
 
 @Component({
   selector: 'app-product',
@@ -33,13 +34,6 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     window.document.title = this.title;
-    // this.commonService.getOrderStatusList().subscribe(
-    //   (response: any) => {
-    //     this.statusList = [{ id: 0, name: 'Tất cả' , description: '' }, ...response.data];
-    //   }, (error) => {
-    //     this.toastr.error(error.error.errorMessage);
-    // });
-    // this.getOrderByStatus();
     this.getProductList();
   }
 
@@ -53,7 +47,7 @@ export class ProductComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // this.getOrderByStatus();
+      this.getProductList();
     });
   }
 
@@ -62,6 +56,7 @@ export class ProductComponent implements OnInit {
       width: '300px',
       data: {
         type: 'product',
+        method: 'create',
       },
     });
 
@@ -70,31 +65,34 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  // openUpdateStatusDialog(orderTrackingNumber: string, appStatusId: number) {
-  //   const dialogRef = this.dialog.open(UpdateAppStatusModal, {
-  //     width: '300px',
-  //     data: {
-  //       type: 'order',
-  //       orderTrackingNumber: orderTrackingNumber,
-  //       appStatusId: appStatusId
-  //     },
-  //   });
+  openUpdateDialog(productData: Product) {
+    const dialogRef = this.dialog.open(SaveProductModal, {
+      width: '300px',
+      data: {
+        type: 'product',
+        method: 'update',
+        product: productData,
+      },
+    });
 
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     this.getOrderByStatus();
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe(result => {
+      this.getProductList();
+    });
+  }
 
-  // getOrderByStatus() {
-  //   var observe = this.orderService.getOrders(this.statusId);
-  //   observe.subscribe(
-  //     (response: any) => {
-  //       this.orders = response.data;
-  //     }, (error) => {
-  //       this.toastr.error(error.error.errorMessage);
-  //     }
-  //   );
-  // }
+  openUpdateAmountDialog(productId: number) {
+    const dialogRef = this.dialog.open(AddInventoryModal, {
+      width: '300px',
+      data: {
+        type: 'product',
+        productId: productId,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getProductList();
+    });
+  }
 
   getProductList() {
     this.productService.getProducts().subscribe(

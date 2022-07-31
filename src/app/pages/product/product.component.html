@@ -27,8 +27,12 @@
                 <ngx-datatable-column name="Category" prop="category.name"></ngx-datatable-column>
                 <ngx-datatable-column name="Actions" [width]="50">
                     <ng-template ngx-datatable-cell-template let-row="row">
+                        <a [routerLink]="" (click)="openUpdateAmountDialog(row.id)" class="pr-2 text-danger"
+                            title="Thêm số lượng"><i class="material-icons">post_add</i></a>
+                        <a [routerLink]="" (click)="openUpdateDialog(row)" class="pr-2 text-danger"
+                            title="Sửa thông tin"><i class="material-icons">edit</i></a>
                         <a [routerLink]="" (click)="openDeleteDialog(row.id)" class="pr-2 text-danger"
-                            title="Xóa đơn hàng"><i class="material-icons">delete</i></a>
+                            title="Xóa sản phẩm"><i class="material-icons">delete</i></a>
                     </ng-template>
                 </ngx-datatable-column>
             </ngx-datatable>
