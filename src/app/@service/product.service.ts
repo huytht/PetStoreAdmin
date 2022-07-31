@@ -41,18 +41,16 @@ export class ProductService extends BaseService{
     return formData;
   }
 
-  public createPetFormData(product: any, images: File[], origins: Origin[], categoryId: number): FormData {
+  public createPetFormData(product: any, images: File[], origins: Origin[]): FormData {
     const formData = new FormData();
     formData.append('name', product.name);
     formData.append('description', product.description);
     formData.append('price', product.price.toString());
     formData.append('amount', product.amount.toString());
-    formData.append('status', product.status);
     formData.append('gender', product.gender);
     formData.append('age', product.age);
-    formData.append('categoryId', categoryId.toString());
-    formData.append('breedId', product.breed.id.toString());
     formData.append('categoryId', product.category.id.toString());
+    formData.append('breedId', product.breed.id.toString());
     origins.forEach(origin => {
       formData.append("originIds", origin.id.toString());
     });
@@ -67,7 +65,15 @@ export class ProductService extends BaseService{
     return this.postRequest(`${this.path}`, formData);
   }
 
+  public updateProduct(productId: number, productUpdate: any): Observable<any> {
+    return this.putRequest(`${this.path}?product-id=${productId}`, productUpdate);
+  }
+
   public deleteProduct(productId: number): Observable<any> {
     return this.deleteRequest(`${this.path}?product-id=${productId}`);
+  }
+
+  public updateInventory(productId: number, amount: number): Observable<any> {
+    return this.putRequest(`${this.path}/amount?product-id=${productId}&amount=${amount}`, {});
   }
 }

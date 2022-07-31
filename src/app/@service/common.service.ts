@@ -21,4 +21,12 @@ export abstract class CommonService extends BaseService {
   getCategoryList(): Observable<Category[]> {
     return this.getRequest<Category[]>(`${this.path}/list/category`);
   }
+
+  getBreedList(): Observable<any[]> {
+    return this.getRequest<any[]>(`${this.path}/list/all/breed`);
+  }
+
+  getOriginList(): Observable<any[]> {
+    return this.getRequest<any[]>(`${this.path}/list/origin`);
+  }
 }
