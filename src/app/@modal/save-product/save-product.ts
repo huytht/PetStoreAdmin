@@ -31,7 +31,9 @@ export class SaveProductModal {
     private productService: ProductService, private toastr: ToastrService, private commonService: CommonService) {
     this.commonService.getCategoryList().subscribe(
       (response: any) => {
-        this.categoryList = response.data;
+        this.categoryList = data.type === 'product' ? response.data.filter(x => !x.name.includes('Danh mục mèo') && !x.name.includes('Danh mục cún')) 
+                                                    : data.typePet === 'cat' ? response.data.filter(x => x.name.includes('Danh mục mèo')) 
+                                                    : response.data.filter(x => x.name.includes('Danh mục cún'));
         this.selectedCategory = this.data.method === "update" ? this.categoryList.find(x => x.id === this.product.category.id) : null;
       }, (error) => {
         this.toastr.error(error.error.errorMessage);
@@ -39,7 +41,7 @@ export class SaveProductModal {
     );
     this.commonService.getBreedList().subscribe(
       (response: any) => {
-        this.breedList = response.data;
+        this.breedList = data.typePet === 'cat' ? response.data.filter(x => x.name.includes('Mèo')) : response.data.filter(x => x.name.includes('Chó'));
         this.selectedBreed = this.data.method === "update" ? this.breedList.find(x => x.id === this.product.breed.id) : null;
       }, (error) => {
         this.toastr.error(error.error.errorMessage);

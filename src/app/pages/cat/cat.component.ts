@@ -56,6 +56,7 @@ export class CatComponent implements OnInit {
       width: '300px',
       data: {
         type: 'pet',
+        typePet: 'cat',
         method: 'create',
       },
     });
