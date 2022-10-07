@@ -36,7 +36,7 @@
                 <div class="col-4">
                   <div class="row">
                     <div class="col-md-4"><strong>Shipping Adress:</strong></div>
-                    <div class="col-md-6">{{ row.shippingAddress.exactAddress }}, {{ row.shippingAddress.wardCommune }}, {{ row.shippingAddress.district }}, {{ row.shippingAddress.provinceCity }}</div>
+                    <div class="col-md-6">{{ row.address }} </div>
                   </div>
                 </div>
               </div>
@@ -57,7 +57,7 @@
                     <ngx-datatable-column>
                       <ng-template let-row="row" ngx-datatable-cell-template>
                         <img
-                          src="{{ baseUrl }}{{ row.imageUrl }}"
+                          src="{{ baseUrl }}{{ row.imagePath }}"
                           alt="product"
                           class="img-fluid"
                           style="width: 50px; height: 50px"
@@ -107,7 +107,7 @@
             </a>
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Order Tracking Number" prop="orderTrackingNumber"></ngx-datatable-column>
+        <ngx-datatable-column name="Order Tracking Number" prop="id"></ngx-datatable-column>
         <ngx-datatable-column name="Order Date" [width]="70">
           <ng-template ngx-datatable-cell-template let-row="row">{{
             row.orderDate | date: "HH:mm:ss dd/MM/yyyy"
@@ -131,7 +131,7 @@
             <a
               [routerLink]=""
               *ngIf="row.orderStatus.id === 2"
-              (click)="orderConfirm(row.orderTrackingNumber)"
+              (click)="orderConfirm(row.id)"
               class="text-success"
               title="Duyệt đơn hàng"
               ><i class="material-icons">task</i></a

@@ -15,14 +15,14 @@ export class AppOrderService extends BaseService{
   path: string = '/order';
 
   public getOrders(orderStatus: number): Observable<any> {
-    return this.getRequest(`${this.path}?order-status=${orderStatus}`);
+    return this.getRequest(`${this.path}?orderStatus=${orderStatus}`);
   }
 
   public confirmOrder(orderTrackingNumber: string): Observable<any> {
-    return this.putRequest(`${this.path}/confirm?order-tracking-number=${orderTrackingNumber}`, {});
+    return this.putRequest(`${this.path}/confirm?orderTrackingNumber=${orderTrackingNumber}`, {});
   }
 
   public deleteOrder(orderId: number): Observable<any> {
-    return this.deleteRequest(`${this.path}?order-id=${orderId}`);
+    return this.deleteRequest(`${this.path}?orderId=${orderId}`);
   }
 }

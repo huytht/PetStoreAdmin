@@ -22,7 +22,7 @@ export class UpdateStatusUserModal {
         this.toastr.success(response.data);
         this.dialogRef.close();
       }, (error) => {
-        this.toastr.error(error.error.errorMessage);
+        this.toastr.error(error.errorMessage);
       }
     );
   }

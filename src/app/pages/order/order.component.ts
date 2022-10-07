@@ -39,7 +39,7 @@ export class OrderComponent implements OnInit {
       (response: any) => {
         this.statusList = [{ id: 0, name: 'Tất cả' , description: '' }, ...response.data];
       }, (error) => {
-        this.toastr.error(error.error.errorMessage);
+        this.toastr.error(error.errorMessage);
     });
     this.getOrderByStatus();
   }
@@ -79,7 +79,7 @@ export class OrderComponent implements OnInit {
         this.toastr.success("Xác nhận đơn hàng thành công");
         this.getOrderByStatus();
       }, (error) => {
-        this.toastr.error(error.error.errorMessage);
+        this.toastr.error(error.errorMessage);
       }
     );
   }
@@ -90,7 +90,7 @@ export class OrderComponent implements OnInit {
       (response: any) => {
         this.orders = response.data;
       }, (error) => {
-        this.toastr.error(error.error.errorMessage);
+        this.toastr.error(error.errorMessage);
       }
     );
   }

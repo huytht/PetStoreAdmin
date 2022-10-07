@@ -37,7 +37,7 @@ export class CatComponent implements OnInit {
     this.getCatList();
   }
 
-  openDeleteDialog(productId: number) {
+  openDeleteDialog(productId: string) {
     const dialogRef = this.dialog.open(DeleteModal, {
       width: '300px',
       data: {
@@ -81,7 +81,7 @@ export class CatComponent implements OnInit {
     });
   }
 
-  openUpdateAmountDialog(productId: number) {
+  openUpdateAmountDialog(productId: string) {
     const dialogRef = this.dialog.open(AddInventoryModal, {
       width: '300px',
       data: {
@@ -100,7 +100,7 @@ export class CatComponent implements OnInit {
       (response: any) => {
         this.products = response.data;
       }, (error) => {
-        this.toastr.error(error.error.errorMessage);
+        this.toastr.error(error.errorMessage);
       }
     );
   }

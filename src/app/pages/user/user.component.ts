@@ -31,7 +31,7 @@ export class UserComponent implements OnInit{
       (response: any) => {
         this.users = response.data;
       }, (error) => {
-        this.toastr.error(error.error.errorMessage);
+        this.toastr.error(error.errorMessage);
       }
     );
   }

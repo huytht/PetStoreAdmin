@@ -44,14 +44,14 @@ export class LoginComponent implements OnInit {
             this.loginFormGroup.get('password').setErrors(null);
             // focus form control username
             this.el.nativeElement.querySelector('#username').focus();
-            this.authenticationService.saveToken(response.data.token);
+            this.authenticationService.saveToken(response.data.token.accessToken);
             if (this.authenticationService.isLoggedIn()) {
-              this.appUserService.getUserInfo(+response.data.userId).subscribe((userInfo: any) => {
+              this.appUserService.getUserInfo(response.data.id).subscribe((userInfo: any) => {
                 this.authenticationService.addUserInfoToLocalCache(userInfo.data);
                 this.router.navigate(['/']).then(r => { })
               });
             }
-          }, (error) => this.toastr.error(error.error.errorMessage))
+          }, (error) => this.toastr.error(error.errorMessage))
       )
     }
   }

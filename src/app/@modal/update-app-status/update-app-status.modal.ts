@@ -21,7 +21,7 @@ export class UpdateAppStatusModal {
       (response: any) => {
         this.appStatusList = response.data;
       }, (error) => {
-        this.toastr.error(error.error.errorMessage);
+        this.toastr.error(error.errorMessage);
       }
     );
     this.appStatusId = this.data.appStatusId;
@@ -46,7 +46,7 @@ export class UpdateAppStatusModal {
         this.toastr.success("Updated successfully");
         this.dialogRef.close();
       }, (error) => {
-        this.toastr.error(error.error.errorMessage);
+        this.toastr.error(error.errorMessage);
       }
     );
   }
@@ -58,7 +58,7 @@ export class UpdateAppStatusModal {
         this.toastr.success("Updated successfully");
         this.dialogRef.close();
       }, (error) => {
-        this.toastr.error(error.error.errorMessage);
+        this.toastr.error(error.errorMessage);
       }
     );
   }

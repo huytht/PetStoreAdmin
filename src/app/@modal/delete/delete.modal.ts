@@ -31,7 +31,7 @@ export class DeleteModal {
         this.toastr.success('Xóa đơn hàng thành công');
         this.dialogRef.close();
       }, (error) => {
-        this.toastr.error(error.error.errorMessage);
+        this.toastr.error(error.errorMessage);
       }
     );
   }
@@ -42,7 +42,7 @@ export class DeleteModal {
         this.toastr.success('Xóa sản phẩm thành công');
         this.dialogRef.close();
       }, (error) => {
-        this.toastr.error(error.error.errorMessage);
+        this.toastr.error(error.errorMessage);
       }
     );
   }

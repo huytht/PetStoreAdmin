@@ -25,7 +25,7 @@ export class AddInventoryModal {
         this.toastr.success("Updated successfully");
         this.dialogRef.close();
       }, (error) => {
-        this.toastr.error(error.error.errorMessage);
+        this.toastr.error(error.errorMessage);
       }
     );
   }

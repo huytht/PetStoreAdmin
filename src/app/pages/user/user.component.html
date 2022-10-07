@@ -29,16 +29,6 @@
             {{ row.userInfo.lastName }} {{ row.userInfo.firstName }}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="Created">
-          <ng-template ngx-datatable-cell-template let-row="row">
-            {{ row.dateNew | date: "HH:mm:ss dd/MM/yyyy" }}
-          </ng-template>
-        </ngx-datatable-column>
-        <ngx-datatable-column name="Last Update">
-          <ng-template ngx-datatable-cell-template let-row="row">
-            {{ row.dateEdit | date: "HH:mm:ss dd/MM/yyyy" }}
-          </ng-template>
-        </ngx-datatable-column>
         <ngx-datatable-column name="Role" [width]="100">
           <ng-template ngx-datatable-cell-template let-row="row">
             {{ getRole(row.appRoles) }}
@@ -56,7 +46,7 @@
         </ngx-datatable-column>
         <ngx-datatable-column name="Actions" [width]="50">
           <ng-template ngx-datatable-cell-template let-row="row">
-            <div *ngIf="!isAdmin(row.appRoles)">
+            <div *ngIf="isAdmin(row.appRoles)">
               <a
                 href="javascript:void(0)"
                 title="Khóa"

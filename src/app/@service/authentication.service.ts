@@ -8,6 +8,7 @@ import { UserInfo } from '../@model/user-info';
 import { NavbarComponent } from '../components/navbar/navbar.component';
 import { AppUser } from '../@model/app-user';
 import { AppUserService } from './app-user.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -77,13 +78,13 @@ export class AuthenticationService extends BaseService {
 
   checkRole(roleToCheck: string): boolean {
     this.loadToken();
-    return (this.jwtHelper.decodeToken(this.token).authorities as Array<string>).indexOf(roleToCheck) !== -1;
+    return (this.jwtHelper.decodeToken(this.token).roles as Array<string>).indexOf(roleToCheck) !== -1;
   }
 
   roleMatch(allowedRole: Array<string>): boolean {
     this.loadToken();
     let isMatch = false;
-    const userRoles = this.jwtHelper.decodeToken(this.token).authorities as Array<string>;
+    const userRoles = this.jwtHelper.decodeToken(this.token).roles as Array<string>;
     allowedRole.forEach(element => {
       if (userRoles.includes(element)) {
         isMatch = true;
@@ -97,6 +98,9 @@ export class AuthenticationService extends BaseService {
   }
 
   public getLoggedInAvatar(): string {
-    return this.loggedInAvatar;
+    return this.loggedInAvatar.substring(0).search('https://robohash.org/') === 0
+              || this.loggedInAvatar.substring(0).search('azurewebsites.net/') === 0
+                ? this.loggedInAvatar
+                : `${environment.apiUrl}${this.loggedInAvatar}`
   }
 }
