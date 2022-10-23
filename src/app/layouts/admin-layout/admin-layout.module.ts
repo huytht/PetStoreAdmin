@@ -31,10 +31,14 @@ import { ProductComponent } from "src/app/pages/product/product.component";
 import { SaveProductModal } from "src/app/@modal/save-product/save-product";
 import { NgxMatFileInputModule } from '@angular-material-components/file-input'; 
 import { AddInventoryModal } from './../../@modal/add-inventory/add-inventory';
+import { SaveModal } from './../../@modal/save-modal/save-modal';
+import { CategoryComponent } from './../../pages/category/category.component';
+import { BreedComponent } from './../../pages/breed/breed.component';
+import { OriginComponent } from './../../pages/origin/origin.component';
 
 @NgModule({
   imports: [
-CommonModule,
+    CommonModule,
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
@@ -69,7 +73,11 @@ CommonModule,
     ProductComponent,
     CatComponent,
     DogComponent,
+    CategoryComponent,
+    BreedComponent,
+    OriginComponent,
     SaveProductModal,
+    SaveModal,
     AddInventoryModal,
     DeleteModal,
     UpdateAppStatusModal,

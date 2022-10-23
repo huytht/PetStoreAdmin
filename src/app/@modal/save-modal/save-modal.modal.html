@@ -1,0 +1,12 @@
+<h1 mat-dialog-title class="text-warning">Save product</h1>
+<div mat-dialog-content>
+  <!-- write a form add new product -->
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="object.name" placeholder="Name">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="saveObject()" cdkFocusInitial>OK</button>
+</div>

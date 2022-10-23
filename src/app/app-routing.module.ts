@@ -11,6 +11,9 @@ import { OrderComponent } from './pages/order/order.component';
 import { ProductComponent } from './pages/product/product.component';
 import { DogComponent } from './pages/dog/dog.component';
 import { CatComponent } from './pages/cat/cat.component';
+import { CategoryComponent } from './pages/category/category.component';
+import { OriginComponent } from './pages/origin/origin.component';
+import { BreedComponent } from './pages/breed/breed.component';
 
 const routes: Routes = [
   {
@@ -21,6 +24,9 @@ const routes: Routes = [
       { path: 'product', component: ProductComponent },
       { path: 'cat', component: CatComponent },
       { path: 'dog', component: DogComponent },
+      { path: 'category', component: CategoryComponent },
+      { path: 'breed', component: BreedComponent },
+      { path: 'origin', component: OriginComponent },
     ]
   },
   {

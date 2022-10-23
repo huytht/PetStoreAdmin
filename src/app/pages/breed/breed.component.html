@@ -1,0 +1,21 @@
+<div class="content">
+    <div class="row">
+        <div class="col-md">
+            <h3>Breed Management</h3>
+            <button (click)="openCreateDialog()" mat-raised-button color="primary">Add new breed</button>
+            <br /><br />
+            <ngx-datatable #breedTable class="material" [rows]="breeds" [columnMode]="ColumnMode.force"
+                [headerHeight]="50" [footerHeight]="50" [limit]="5" [rowHeight]="50" [reorderable]="reorderable">
+                <ngx-datatable-column name="Name" prop="name"></ngx-datatable-column>
+                <ngx-datatable-column name="Actions" [width]="50">
+                    <ng-template ngx-datatable-cell-template let-row="row">
+                        <a [routerLink]="" (click)="openUpdateDialog(row)" class="pr-2 text-danger"
+                            title="Sửa thông tin"><i class="material-icons">edit</i></a>
+                        <a [routerLink]="" (click)="openDeleteDialog(row.id)" class="pr-2 text-danger"
+                            title="Xóa sản phẩm"><i class="material-icons">delete</i></a>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+    </div>
+</div>

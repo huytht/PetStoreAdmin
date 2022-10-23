@@ -44,6 +44,24 @@ export const ROUTES: RouteInfo[] = [
     icon: "icon-molecule-40",
     class: ""
   },
+  {
+    path: "/category",
+    title: "Category",
+    icon: "icon-molecule-40",
+    class: ""
+  },
+  {
+    path: "/breed",
+    title: "Breed",
+    icon: "icon-molecule-40",
+    class: ""
+  },
+  {
+    path: "/origin",
+    title: "origin",
+    icon: "icon-molecule-40",
+    class: ""
+  },
 ];
 
 @Component({
