@@ -71,6 +71,7 @@ export class DogComponent implements OnInit {
       width: '300px',
       data: {
         type: 'pet',
+        typePet: 'dog',
         method: 'update',
         product: productData,
       },
