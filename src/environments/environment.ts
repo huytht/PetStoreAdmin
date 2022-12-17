@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: "https://localhost:7277/api"
+  apiUrl: "https://pet-store-api.onrender.com/api"
 };
 
 /*
